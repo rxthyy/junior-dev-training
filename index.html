@@ -10,7 +10,7 @@
     body { margin: 0; background: #f1f5f9; color: var(--navy); font: 1rem/1.65 system-ui, sans-serif; }
     header { background: var(--navy); color: #fff; padding: clamp(2.5rem, 6vw, 4rem) 1rem 3rem; }
     .wrap { max-width: 67rem; margin: auto; }
-    main { max-width: 50rem; margin: auto; }
+    main { max-width: 58rem; margin: auto; }
     h1, h2, h3 { line-height: 1.2; }
     h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.035em; }
     .eyebrow { margin: 0 0 1rem; color: #9bceff; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; }
@@ -37,11 +37,10 @@
     button { font: inherit; cursor: pointer; padding: .35rem .7rem; }
     summary { cursor: pointer; font-weight: 650; }
     details + details { margin-top: .65rem; }
-    .install-video { max-width: 36rem; margin: 1rem 0; }
-    .install-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: .45rem; background: var(--navy); }
-    .install-video a { display: inline-block; margin-top: .35rem; }
+    .install-video { margin: 1.25rem 0; overflow: hidden; border: 1px solid var(--border); border-radius: .75rem; background: var(--navy); }
+    .install-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
     @media print {
-      .install-video iframe { display: none; }
+      .install-video { display: none; }
       body, header, section { background: white; color: black; }
       .eyebrow, .intro { color: black; }
       label { background: #eee; }
@@ -82,7 +81,6 @@
       <p>Download the Windows User Installer. Run it, keep the default options including <strong>Add to PATH</strong>, and open VS Code from the Start menu. Choose <strong>Terminal → New Terminal</strong> to open a terminal inside the editor. Use PowerShell for the commands in this guide. <a href="https://code.visualstudio.com/docs/setup/windows">VS Code Windows setup</a></p>
       <div class="install-video">
         <iframe src="https://www.youtube-nocookie.com/embed/1W0hL6_uX9A" referrerpolicy="strict-origin-when-cross-origin" title="VS Code installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-        <a href="https://www.youtube.com/watch?v=1W0hL6_uX9A">Watch the VS Code tutorial on YouTube</a>
       </div>
       <label><input id="vscode" type="checkbox"> I can open VS Code and its PowerShell terminal.</label>
 
@@ -90,7 +88,6 @@
       <p>Git downloads and tracks project code. Download Git for Windows, choose the installer for your computer, and keep the default option that makes Git available from the command line. Close and reopen VS Code after installing. <a href="https://git-scm.com/install/windows">Git for Windows</a></p>
       <div class="install-video">
         <iframe src="https://www.youtube-nocookie.com/embed/TT8ktVp5j-k" referrerpolicy="strict-origin-when-cross-origin" title="Git installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-        <a href="https://www.youtube.com/watch?v=TT8ktVp5j-k">Watch the Git tutorial on YouTube</a>
       </div>
       <pre><code>git --version</code></pre>
       <label><input id="git" type="checkbox"> The terminal prints a Git version.</label>
@@ -99,7 +96,6 @@
       <p>Node.js runs the development tools. npm installs the JavaScript packages the project uses. Select the Node.js 24 LTS release line used in this walkthrough, download the Windows installer (.msi) for your computer, and keep npm and PATH enabled in the installer. Close and reopen VS Code again. <a href="https://nodejs.org/en/download">Node.js downloads</a></p>
       <div class="install-video">
         <iframe src="https://www.youtube-nocookie.com/embed/tHthqaBHjeE" referrerpolicy="strict-origin-when-cross-origin" title="Node.js and npm installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-        <a href="https://www.youtube.com/watch?v=tHthqaBHjeE">Watch the Node.js and npm tutorial on YouTube</a>
       </div>
       <p>Run each line separately by pressing Enter. Use <code>npm.cmd</code> in PowerShell to run the Windows npm launcher.</p>
       <pre><code>node --version
@@ -187,14 +183,12 @@ Test-Path package.json</code></pre>
         <li>Ask your mentor which PHP version the team's backend uses. Download that Windows build from PHP, extract it to a folder you can write to, and add the folder containing <code>php.exe</code> to your user <strong>Path</strong> in Windows Environment Variables. Open a fresh PowerShell window and check the version. <a href="https://windows.php.net/download/">PHP for Windows</a>
           <div class="install-video">
             <iframe src="https://www.youtube-nocookie.com/embed/57IeUL1ILzM" referrerpolicy="strict-origin-when-cross-origin" title="PHP installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/watch?v=57IeUL1ILzM">Watch the PHP tutorial on YouTube</a>
           </div>
           <pre><code>php --version</code></pre>
         </li>
         <li>Composer installs packages for PHP projects. Use <strong>Composer-Setup.exe</strong> and select the <code>php.exe</code> you verified if prompted. Open a new PowerShell window and check Composer. <a href="https://getcomposer.org/doc/00-intro.md#installation-windows">Composer Windows installation</a>
           <div class="install-video">
             <iframe src="https://www.youtube-nocookie.com/embed/9V0tEwkc5OM" referrerpolicy="strict-origin-when-cross-origin" title="Composer installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/watch?v=9V0tEwkc5OM">Watch the Composer tutorial on YouTube</a>
           </div>
           <pre><code>composer --version</code></pre>
         </li>
@@ -205,13 +199,11 @@ Test-Path package.json</code></pre>
         <li>Ask your mentor or IT to confirm that your computer meets the Windows, virtualization and WSL 2 requirements. If WSL needs setup, follow Microsoft's guide with them and restart if prompted. <a href="https://learn.microsoft.com/en-us/windows/wsl/install">Install WSL</a>
           <div class="install-video">
             <iframe src="https://www.youtube-nocookie.com/embed/dFUrm9dTZHA" referrerpolicy="strict-origin-when-cross-origin" title="WSL 2 installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/watch?v=dFUrm9dTZHA">Watch the WSL 2 tutorial on YouTube</a>
           </div>
         </li>
         <li>Download Docker Desktop for Windows, run the installer with the WSL 2 backend, then launch Docker Desktop and wait for the engine to start. Open a fresh PowerShell window and run these checks. <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop for Windows</a>
           <div class="install-video">
             <iframe src="https://www.youtube-nocookie.com/embed/F-GFS6yRysU" referrerpolicy="strict-origin-when-cross-origin" title="Docker Desktop installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-            <a href="https://www.youtube.com/watch?v=F-GFS6yRysU">Watch the Docker Desktop tutorial on YouTube</a>
           </div>
           <pre><code>docker version
 docker compose version</code></pre>
