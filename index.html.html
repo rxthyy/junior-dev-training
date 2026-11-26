@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Junior Developer Training | Konek Story</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { --navy: #132639; --blue: #174e91; --border: #d6e0eb; --pale-blue: #e9f3ff; }
+    body { margin: 0; background: #f1f5f9; color: var(--navy); font: 1rem/1.65 system-ui, sans-serif; }
+    header { background: var(--navy); color: #fff; padding: clamp(2.5rem, 6vw, 4rem) 1rem 3rem; }
+    .wrap { max-width: 67rem; margin: auto; }
+    main { max-width: 50rem; margin: auto; }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.035em; }
+    .eyebrow { margin: 0 0 1rem; color: #9bceff; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; }
+    .intro { max-width: 45rem; margin: 1.25rem 0; color: #dce9f7; }
+    .topics, .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: .85rem; }
+    .topics { margin: 0 0 1rem; padding: 0; list-style: none; }
+    .topics li { margin: 0; border: 1px solid #52677c; border-radius: 999px; padding: .3rem .75rem; }
+    .header-actions { gap: .75rem; }
+    .header-actions p { margin: 0; }
+    #print { background: #fff; color: #163453; border: 1px solid #a9c2df; border-radius: .45rem; padding: .65rem .95rem; }
+    #print:hover { background: var(--pale-blue); }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.25rem; padding: .9rem 1rem; background: #fff; border-bottom: 1px solid var(--border); font-size: .9rem; }
+    nav a { text-decoration: none; }
+    nav a:hover, nav a:focus-visible { text-decoration: underline; }
+    a { color: var(--blue); }
+    main { padding: 1rem; }
+    section { background: white; border: 1px solid var(--border); border-radius: .75rem; margin: 1rem 0; padding: clamp(1rem, 4vw, 2rem); }
+    h2 { margin-top: 0; }
+    li + li { margin-top: .6rem; }
+    pre { background: var(--navy); color: white; padding: .75rem 1rem; border-radius: .4rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+    :not(pre) > code { overflow-wrap: anywhere; }
+    label { display: flex; align-items: baseline; gap: .5rem; background: var(--pale-blue); padding: .6rem .8rem; border-radius: .4rem; }
+    input { accent-color: var(--blue); }
+    button { font: inherit; cursor: pointer; padding: .35rem .7rem; }
+    summary { cursor: pointer; font-weight: 650; }
+    details + details { margin-top: .65rem; }
+    @media print {
+      body, header, section { background: white; color: black; }
+      .eyebrow, .intro { color: black; }
+      label { background: #eee; }
+      nav, button { display: none; }
+      section { border: 0; padding: .5rem 0; }
+      pre { background: #eee; color: black; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">Junior developer onboarding</p>
+      <h1>Run Konek Story<br>on your computer</h1>
+      <p class="intro">Install your development tools, clone the project and run it on Windows. Work through one checkpoint at a time with your mentor.</p>
+      <ul class="topics" aria-label="Training format">
+        <li>5 sessions</li>
+        <li>Windows + PowerShell</li>
+        <li>Git + local development</li>
+      </ul>
+      <div class="header-actions">
+        <button id="print" type="button">Print / Save as PDF</button>
+        <p id="progress" aria-live="polite"></p>
+      </div>
+    </div>
+  </header>
+  <nav aria-label="Training sections">
+    <a href="#tools">Install tools</a>
+    <a href="#clone">Clone the repository</a>
+    <a href="#run">Run the app</a>
+    <a href="#later">PHP, Composer and Docker</a>
+  </nav>
+  <main>
+    <section id="tools">
+      <h2>Session 1 · Install your tools</h2>
+      <p>Set up VS Code, Git and Node.js first. PHP, Composer and Docker have their own practice session after the first launch.</p>
+      <h3>1. Install Visual Studio Code</h3>
+      <p>Download the Windows User Installer. Run it, keep the default options including <strong>Add to PATH</strong>, and open VS Code from the Start menu. Choose <strong>Terminal → New Terminal</strong> to open a terminal inside the editor. Use PowerShell for the commands in this guide. <a href="https://code.visualstudio.com/docs/setup/windows">VS Code Windows setup</a></p>
+      <label><input id="vscode" type="checkbox"> I can open VS Code and its PowerShell terminal.</label>
+
+      <h3>2. Install Git</h3>
+      <p>Git downloads and tracks project code. Download Git for Windows, choose the installer for your computer, and keep the default option that makes Git available from the command line. Close and reopen VS Code after installing. <a href="https://git-scm.com/install/windows">Git for Windows</a></p>
+      <pre><code>git --version</code></pre>
+      <label><input id="git" type="checkbox"> The terminal prints a Git version.</label>
+
+      <h3>3. Install Node.js and npm</h3>
+      <p>Node.js runs the development tools. npm installs the JavaScript packages the project uses. Select the Node.js 24 LTS release line used in this walkthrough, download the Windows installer (.msi) for your computer, and keep npm and PATH enabled in the installer. Close and reopen VS Code again. <a href="https://nodejs.org/en/download">Node.js downloads</a></p>
+      <p>Run each line separately by pressing Enter. Use <code>npm.cmd</code> in PowerShell to run the Windows npm launcher.</p>
+      <pre><code>node --version
+npm.cmd --version</code></pre>
+      <label><input id="node" type="checkbox"> Node prints a version beginning with v24 and npm prints its own version.</label>
+    </section>
+
+    <section id="clone">
+      <h2>Session 2 · Get your own copy of the project</h2>
+      <h3>Set up your Git name and email</h3>
+      <p>Open PowerShell in VS Code. Git records this name and email on your commits. Replace both examples with your name and the email you use for GitHub. If you keep your email private, copy your GitHub-provided <code>noreply</code> address from your account settings. GitHub may ask you to sign in separately when you clone or push.</p>
+      <pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre>
+      <p><code>--global</code> sets the defaults for repositories you use under your Windows account. Check that Git saved the values you intended.</p>
+      <pre><code>git config --global --get user.name
+git config --global --get user.email</code></pre>
+      <label><input id="git-identity" type="checkbox"> Git shows the name and email I want on my commits.</label>
+
+      <h3>Clone Konek Story</h3>
+      <p>A repository is a project and its Git history. Cloning downloads both. Open the repository in your browser first. If GitHub asks you to sign in or you cannot see the repository, ask your mentor to confirm your account has access. <a href="https://github.com/rxthyy/konek-story">Konek Story on GitHub</a></p>
+      <ol>
+        <li>Create a <strong>Projects</strong> folder anywhere you can write files. In VS Code choose <strong>File → Open Folder</strong> and select <strong>Projects</strong>. Open a new PowerShell terminal and check its starting folder.
+          <pre><code>Get-Location</code></pre>
+          The last part of the path should be <code>Projects</code>.
+        </li>
+        <li>Download the repository. Git may open a browser for sign-in. Wait for the prompt to return.
+          <pre><code>git clone https://github.com/rxthyy/konek-story.git</code></pre>
+          If you already have a clone, open it in VS Code, open a new terminal, and run <code>git status</code> there. Then go to Session 3.
+        </li>
+        <li>Move into the new folder and check what Git sees.
+          <pre><code>cd konek-story
+git status</code></pre>
+          Git should report your current branch. Open <strong>konek-story</strong> with <strong>File → Open Folder</strong> so the VS Code Explorer shows <code>package.json</code> and <code>src</code>. Open a new terminal there.
+        </li>
+      </ol>
+      <label><input id="cloned" type="checkbox"> I can find package.json and run git status in my clone.</label>
+      <details>
+        <summary>Practice basic Git commands after the app runs</summary>
+        <p>Start in the <strong>konek-story</strong> folder. Run these one at a time to inspect your local copy.</p>
+        <ul>
+          <li><code>git status --short</code> lists changed and new files. An empty result means the working tree is clean.</li>
+          <li><code>git branch --show-current</code> prints the branch you are on.</li>
+          <li><code>git log -5 --oneline</code> shows up to five recent commits.</li>
+          <li><code>git diff</code> shows edits to tracked files that you have yet to stage.</li>
+        </ul>
+        <p>For a first local commit, use a clean checkout and create a practice branch.</p>
+        <pre><code>git switch -c practice/first-commit</code></pre>
+        <p>In VS Code, create <code>git-practice.txt</code> in the project folder, write one sentence, and save it. Then run each line separately.</p>
+        <pre><code>git add git-practice.txt
+git status --short
+git commit -m "Add Git practice note"
+git log -1 --oneline</code></pre>
+        <p><code>git add</code> stages the practice file. Before committing, check that it is the only staged file. <code>git commit</code> saves the staged changes in your local Git history. The last command shows your new commit.</p>
+      </details>
+    </section>
+
+    <section id="run">
+      <h2>Session 3 · Start the app</h2>
+      <p>Use PowerShell inside <strong>konek-story</strong>. Confirm the terminal is in the right folder before installing anything.</p>
+      <pre><code>Get-Location
+Test-Path package.json</code></pre>
+      <p>The path should end in <code>konek-story</code> and the second command should print <code>True</code>.</p>
+      <h3>1. Install the project packages</h3>
+      <pre><code>npm.cmd ci</code></pre>
+      <p>This installs the exact package versions recorded in <code>package-lock.json</code>. It also runs the project's setup scripts for icons and the mock API worker. The first install can take a few minutes. Wait for the prompt to return before continuing.</p>
+      <label><input id="packages" type="checkbox"> The package install completed successfully.</label>
+      <h3>2. Start the development server</h3>
+      <pre><code>npm.cmd run dev -- --host 127.0.0.1</code></pre>
+      <p>Keep the terminal open. When Vite prints <strong>Local</strong>, open that address in your browser. It is usually <a href="http://127.0.0.1:5173/">http://127.0.0.1:5173/</a>. If Vite lists a different port, use the address it printed.</p>
+      <h3>3. Stop and restart it</h3>
+      <p>Click the terminal and press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the server. If Windows asks whether to terminate the batch job, enter <code>Y</code>. Run the same start command again and refresh your browser. On a normal return visit, open the existing clone and run the start command. Run <code>npm.cmd ci</code> again after the dependency files change.</p>
+      <label><input id="running" type="checkbox"> I can open the app in my browser, stop it and start it again.</label>
+      <h3>If you get stuck</h3>
+      <details><summary>PowerShell cannot find a command</summary><p>Close all VS Code windows and reopen the editor. Repeat that tool's version check. For npm, use <code>npm.cmd</code>.</p></details>
+      <details><summary>Git reports “repository not found”</summary><p>Open the GitHub link in your browser and check that you are signed into the account your mentor granted access to.</p></details>
+      <details><summary>npm cannot find package.json</summary><p>Run <code>Get-Location</code> and open the <strong>konek-story</strong> folder in VS Code. Open a new terminal and repeat the folder check.</p></details>
+      <details><summary>The browser cannot reach the app</summary><p>Check that Vite is still running and use the exact address it printed. If installation or startup failed, bring your mentor the command you ran and the first error message.</p></details>
+    </section>
+
+    <section id="later">
+      <h2>Follow-up sessions · PHP, Composer and Docker</h2>
+      <p>Konek Story's first launch uses Git, Node.js and npm. Install the following tools in separate sessions when the team is ready to introduce PHP projects and containers.</p>
+      <h3>Session 4 · Install PHP, then Composer</h3>
+      <ol>
+        <li>Ask your mentor which PHP version the team's backend uses. Download that Windows build from PHP, extract it to a folder you can write to, and add the folder containing <code>php.exe</code> to your user <strong>Path</strong> in Windows Environment Variables. Open a fresh PowerShell window and check the version. <a href="https://windows.php.net/download/">PHP for Windows</a>
+          <pre><code>php --version</code></pre>
+        </li>
+        <li>Composer installs packages for PHP projects. Use <strong>Composer-Setup.exe</strong> and select the <code>php.exe</code> you verified if prompted. Open a new PowerShell window and check Composer. <a href="https://getcomposer.org/doc/00-intro.md#installation-windows">Composer Windows installation</a>
+          <pre><code>composer --version</code></pre>
+        </li>
+      </ol>
+      <label><input id="composer" type="checkbox"> PHP and Composer both print a version.</label>
+      <h3>Session 5 · Install Docker Desktop</h3>
+      <ol>
+        <li>Ask your mentor or IT to confirm that your computer meets the Windows, virtualization and WSL 2 requirements. If WSL needs setup, follow Microsoft's guide with them and restart if prompted. <a href="https://learn.microsoft.com/en-us/windows/wsl/install">Install WSL</a></li>
+        <li>Download Docker Desktop for Windows, run the installer with the WSL 2 backend, then launch Docker Desktop and wait for the engine to start. Open a fresh PowerShell window and run these checks. <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop for Windows</a>
+          <pre><code>docker version
+docker compose version</code></pre>
+          Docker should report both <strong>Client</strong> and <strong>Server</strong>. Compose should print its version.
+        </li>
+      </ol>
+      <label><input id="docker" type="checkbox"> Docker Desktop is running and both Docker checks work.</label>
+    </section>
+  </main>
+  <script>
+    const checks = [...document.querySelectorAll('input[type="checkbox"]')]
+    const progress = document.querySelector('#progress')
+    const storageKey = 'konek-story-training-progress-v1'
+
+    function showProgress() {
+      const complete = checks.filter(check => check.checked).length
+      progress.textContent = `${complete} of ${checks.length} checkpoints complete`
+    }
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '[]')
+      checks.forEach(check => { check.checked = saved.includes(check.id) })
+    } catch {
+      // The checklist also works when browser storage is unavailable.
+    }
+
+    for (const check of checks) {
+      check.addEventListener('change', () => {
+        const complete = checks.filter(item => item.checked).map(item => item.id)
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(complete))
+        } catch {
+          // Keep the current progress visible even when it cannot be saved.
+        }
+        showProgress()
+      })
+    }
+    showProgress()
+    document.querySelector('#print').addEventListener('click', () => window.print())
+  </script>
+</body>
+</html>
