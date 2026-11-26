@@ -21,11 +21,7 @@
     .progress-card { margin: 0; justify-self: end; width: min(100%, 15rem); padding: 1.4rem; text-align: center; background: #1a3249; border: 1px solid #52677c; border-radius: 1rem; }
     .progress-ring { display: grid; place-items: center; width: min(100%, 8rem); aspect-ratio: 1; margin: 0 auto .85rem; border-radius: 50%; background: conic-gradient(#9bceff var(--completion, 0%), #52677c 0); }
     .progress-ring span { display: grid; place-items: center; width: 82%; aspect-ratio: 1; border-radius: 50%; background: #1a3249; font-size: 1.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-    .progress-card figcaption { color: #dce9f7; font-size: .85rem; }
-    @media (max-width: 46rem) {
-      .wrap { grid-template-columns: minmax(0, 1fr); }
-      .progress-card { justify-self: start; }
-    }
+    .progress-card #progress { color: #dce9f7; font-size: .85rem; }
     a { color: var(--blue); }
     main { padding: 1rem; }
     section { background: white; border: 1px solid var(--border); border-radius: .75rem; margin: 1rem 0; padding: clamp(1rem, 4vw, 2rem); }
@@ -68,7 +64,50 @@
     .lesson-back:hover { background: var(--pale-blue); border-color: #a9c2df; }
     .lesson-back:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
     .lesson-back-icon { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; border-radius: .4rem; background: var(--pale-blue); font-size: 1.1rem; }
+    body { background: #edf2ff; }
+    header { padding: 0; background: radial-gradient(ellipse at 64% 0%, #15558f 0%, transparent 47%), linear-gradient(150deg, #0a1a3a 48%, #22235f 77%, #102443); }
+    html { scroll-padding-top: 5rem; }
+    .topbar { position: sticky; top: 0; z-index: 10; color: white; background: linear-gradient(110deg, #0a1a3a, #173969 68%, #1b2b5b); border-bottom: 1px solid #ffffff24; }
+    .topbar-inner { max-width: 98rem; margin: auto; padding: .65rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; }
+    .topbar nav { display: flex; flex-wrap: wrap; gap: .25rem; }
+    .topbar a { color: #ecf4ff; text-decoration: none; padding: .35rem .85rem; border-radius: 999px; }
+    .topbar a:hover, .topbar a[aria-current] { background: #ffffff20; }
+    .wrap { max-width: 90rem; padding: 2rem 1.5rem; grid-template-columns: minmax(0, 1.4fr) minmax(0, .95fr) minmax(13rem, .72fr); }
+    .topics { margin-bottom: 0; }
+    .topics li { background: #325b9b40; border-color: #77a9ee50; }
+    .progress-card { width: 100%; background: #152e59bb; border-color: #83abf55c; box-shadow: inset 0 1px 20px #7297ff20; }
+    .progress-card h2 { margin: 0 0 1rem; text-align: left; font-size: 1.05rem; }
+    .progress-ring span { background: #152e55; }
+    .continue-link { display: block; margin-top: 1rem; padding: .6rem .9rem; border-radius: 999px; background: linear-gradient(135deg, #2769d1, #4036c5); color: white; font-weight: 650; text-decoration: none; }
+    .continue-link:hover { background: #265dba; }
+    .hero-art { display: block; width: 100%; height: auto; align-self: end; filter: drop-shadow(0 .8rem 1rem #0005); }
+    main { max-width: 96rem; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 1.25rem; padding: 1.25rem; }
+    main > section { margin: 0; border-radius: 1rem; box-shadow: 0 .4rem 1rem #16356c0b; }
+    .lesson { grid-column: 1 / -1; width: min(100%, 58rem); justify-self: center; }
+    .before-start { padding: .8rem 1rem; border: 1px solid #b9d7fc; border-radius: .65rem; background: #edf6ff; }
+    .before-start p { margin: .2rem 0 0; }
+    .outline-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .35rem 1rem; }
+    .outline-heading h2, .outline-heading p { margin: 0; }
+    .outline-heading p { font-size: .85rem; }
+    .session-list a { background: #f7f9ff; box-shadow: 0 2px 3px #16356c0c; }
+    .session-list .session-progress { min-width: 3.1rem; text-align: center; }
+    .session-list .session-meter { flex: 0 1 6rem; height: .4rem; border-radius: 999px; overflow: hidden; appearance: none; background: #d6dfee; }
+    .session-meter::-webkit-progress-bar { background: #d6dfee; }
+    .session-meter::-webkit-progress-value { background: #3866d5; }
+    .session-meter::-moz-progress-bar { background: #3866d5; }
+    .session-list a::after { content: '›' / ''; color: var(--blue); font-size: 1.3rem; line-height: 1; }
+    @media (max-width: 66rem) {
+      .wrap { grid-template-columns: minmax(0, 1fr) minmax(12rem, .45fr); }
+      .hero-art { display: none; }
+    }
+    @media (max-width: 48rem) {
+      html { scroll-padding-top: 7rem; }
+      .wrap, main { grid-template-columns: minmax(0, 1fr); }
+      .progress-card { max-width: 23rem; justify-self: start; }
+    }
     @media print {
+      .topbar, .hero-art { display: none; }
+      .wrap, main { display: block; }
       .lesson[hidden] { display: block; }
       .lesson-back { display: none; }
       .install-video { display: none; }
@@ -84,6 +123,16 @@
   </style>
 </head>
 <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <strong>Junior Developer Onboarding</strong>
+        <nav aria-label="Training navigation">
+          <a href="index.html" id="home-link">Home</a>
+          <a href="index.html#sessions">Course</a>
+          <a href="index.html?session=run#help">Help</a>
+        </nav>
+      </div>
+    </div>
   <header>
     <div class="wrap">
       <div>
@@ -96,10 +145,13 @@
           <li>Git + local development</li>
         </ul>
       </div>
-      <figure class="progress-card" aria-label="Training progress">
+      <img class="hero-art" src="training-hero.png" alt="" width="1593" height="987">
+      <section class="progress-card" aria-labelledby="progress-heading">
+        <h2 id="progress-heading">Your progress</h2>
         <div class="progress-ring" id="checkpoint-ring" aria-hidden="true"><span id="checkpoint-percent">0%</span></div>
-        <figcaption id="progress" aria-live="polite"></figcaption>
-      </figure>
+        <p id="progress" aria-live="polite"></p>
+        <a class="continue-link" id="continue-course" href="?session=tools">Continue course</a>
+      </section>
     </div>
   </header>
   <main>
@@ -107,9 +159,16 @@
       <h2 id="start-heading">Start here · Your first local project</h2>
       <p>This guide is for junior developers setting up a Windows development environment for the first time. You’ll practice the workflow you’ll use when joining a project: set up your tools, get the code from GitHub, and run it on your own computer. Konek Story is the practice project.</p>
       <p>Work through one session at a time. Run the commands in VS Code’s PowerShell terminal and check off each item once you’ve verified the result. Your progress is saved in this browser.</p>
+      <aside class="before-start">
+        <strong>Before you begin</strong>
+        <p>Use a Windows computer with an internet connection.</p>
+      </aside>
     </section>
     <section id="sessions" aria-labelledby="sessions-heading">
-      <h2 id="sessions-heading">Course outline</h2>
+      <div class="outline-heading">
+        <h2 id="sessions-heading">Course outline</h2>
+        <p id="course-total"></p>
+      </div>
       <ol class="session-list">
         <li><a href="?session=tools"><strong>Session 1</strong><span>Install your tools</span></a></li>
         <li><a href="?session=clone"><strong>Session 2</strong><span>Set up Git and clone Konek Story</span></a></li>
@@ -231,7 +290,7 @@ Test-Path package.json</code></pre>
       <h3>3. Stop and restart it</h3>
       <p>Click the terminal and press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the server. If Windows asks whether to terminate the batch job, enter <code>Y</code>. Run the same start command again and refresh your browser. On a normal return visit, open the existing clone and run the start command. Run <code>npm.cmd ci</code> again after the dependency files change.</p>
       <label><input id="running" type="checkbox"> I can open the app in my browser, stop it and start it again.</label>
-      <h3>If you get stuck</h3>
+      <h3 id="help">If you get stuck</h3>
       <details><summary>PowerShell cannot find a command</summary><p>Close all VS Code windows and reopen the editor. Repeat that tool's version check. For npm, use <code>npm.cmd</code>.</p></details>
       <details><summary>Git reports “repository not found”</summary><p>Open the GitHub link in your browser and check that you are signed into the account your mentor granted access to.</p></details>
       <details><summary>npm cannot find package.json</summary><p>Run <code>Get-Location</code> and open the <strong>konek-story</strong> folder in VS Code. Open a new terminal and repeat the folder check.</p></details>
@@ -297,6 +356,9 @@ docker compose version</code></pre>
       arrow.textContent = '←'
       back.append(arrow, 'Back to course outline')
       activeLesson.prepend(back)
+      if (location.hash === '#help') document.querySelector('#help').scrollIntoView()
+    } else if (!location.hash) {
+      document.querySelector('#home-link').setAttribute('aria-current', 'page')
     }
 
     if (navigator.clipboard?.writeText) {
@@ -332,12 +394,17 @@ docker compose version</code></pre>
     const progressRing = document.querySelector('#checkpoint-ring')
     const progressPercent = document.querySelector('#checkpoint-percent')
     const storageKey = 'konek-story-training-progress-v1'
+    const continueCourse = document.querySelector('#continue-course')
+    document.querySelector('#course-total').textContent = lessons.length + ' sessions · ' + checks.length + ' checkpoints'
     const sessionProgress = [...document.querySelectorAll('.session-list a')].map(link => {
       const lesson = document.getElementById(new URL(link.href).searchParams.get('session'))
       const badge = document.createElement('span')
       badge.className = 'session-progress'
-      link.append(badge)
-      return { badge, checkpoints: [...lesson.querySelectorAll('input[type="checkbox"]')] }
+      const meter = document.createElement('progress')
+      meter.className = 'session-meter'
+      meter.setAttribute('aria-hidden', 'true')
+      link.append(meter, badge)
+      return { link, badge, meter, checkpoints: [...lesson.querySelectorAll('input[type="checkbox"]')] }
     })
 
     function showProgress() {
@@ -346,8 +413,13 @@ docker compose version</code></pre>
       const percent = complete / checks.length * 100
       progressRing.style.setProperty('--completion', percent + '%')
       progressPercent.textContent = Math.round(percent) + '%'
-      for (const { badge, checkpoints } of sessionProgress) {
+      const next = sessionProgress.find(({ checkpoints }) => checkpoints.some(check => !check.checked))
+      continueCourse.href = next ? next.link.href : 'index.html#sessions'
+      continueCourse.textContent = next ? 'Continue course' : 'Review course'
+      for (const { badge, meter, checkpoints } of sessionProgress) {
         const done = checkpoints.filter(check => check.checked).length
+        meter.max = checkpoints.length
+        meter.value = done
         const percentage = Math.round(done / checkpoints.length * 100)
         badge.textContent = percentage + '%'
         badge.setAttribute('aria-label', percentage + '% complete')
