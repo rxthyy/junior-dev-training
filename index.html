@@ -105,7 +105,81 @@
       .wrap, main { grid-template-columns: minmax(0, 1fr); }
       .progress-card { max-width: 23rem; justify-self: start; }
     }
+    #tools { width: min(100%, 80rem); }
+    .setup-layout { display: grid; grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr); align-items: start; gap: 1.25rem; }
+    .setup-sidebar { position: sticky; top: 5rem; display: grid; gap: .65rem; }
+    .setup-panel { padding: 1rem; border: 1px solid var(--border); border-radius: .85rem; background: #f8fbff; }
+    .setup-sidebar h3 { margin: 0; font-size: 1rem; }
+    .setup-progress-heading { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+    #setup-percent { color: var(--blue); font-weight: 750; }
+    .setup-sidebar progress { display: block; width: 100%; height: .65rem; margin: .7rem 0 .5rem; border: 0; border-radius: 99px; overflow: hidden; appearance: none; background: #dce9fa; }
+    .setup-sidebar progress::-webkit-progress-bar { background: #dce9fa; }
+    .setup-sidebar progress::-webkit-progress-value { background: #2865c6; border-radius: 99px; }
+    .setup-sidebar progress::-moz-progress-bar { background: #2865c6; border-radius: 99px; }
+    .setup-sidebar p { margin: 0; font-size: .85rem; }
+    .setup-sidebar ol, .setup-tips ul { margin: .65rem 0 0; padding: 0; list-style: none; }
+    .setup-sidebar li + li { margin-top: .2rem; }
+    .setup-tasks a { position: relative; display: flex; gap: .65rem; align-items: center; padding: .45rem .55rem; border-radius: .6rem; color: var(--navy); font-size: .9rem; text-decoration: none; }
+    .setup-tasks a::before { content: ''; flex: 0 0 .95rem; height: .95rem; box-sizing: border-box; border: 2px solid #879cba; border-radius: 50%; background: #f8fbff; }
+    .setup-tasks li:not(:last-child) a::after { content: ''; position: absolute; top: calc(50% + .48rem); left: 1rem; height: calc(100% - .75rem); width: 1px; background: #b5c6df; pointer-events: none; }
+    .setup-tasks a:hover, .setup-tasks a[aria-current] { background: #dceaff; color: #164583; }
+    .setup-tasks a[aria-current] { font-weight: 700; }
+    .setup-tasks a[aria-current]::before { border-color: #255cc3; border-width: 3px; }
+    .setup-tasks a[data-complete]::before { background: #255cc3; border-color: #255cc3; box-shadow: inset 0 0 0 2px #fff; }
+    .setup-tips { background: #e7f0ff; }
+    .setup-tips li { display: flex; gap: .55rem; font-size: .88rem; }
+    .setup-tips li::before { content: '✓' / ''; color: var(--blue); font-weight: 750; }
+    .setup-step { padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border); border-radius: .85rem; background: #fbfdff; }
+    .setup-step + .setup-step { margin-top: 1rem; }
+    .setup-step-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .35rem .75rem; margin-bottom: 1rem; }
+    .setup-step h3 { display: flex; align-items: center; gap: .6rem; margin: 0; }
+    .setup-step h3 span { display: inline-grid; place-items: center; flex: 0 0 1.9rem; height: 1.9rem; border-radius: 50%; background: #c7e3ff; color: var(--blue); }
+    .setup-duration { font-size: .82rem; font-weight: 650; color: #385375; }
+    .setup-step-body { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 1rem; }
+    .setup-step-body ol { margin: 0; padding-left: 1.25rem; font-size: .93rem; }
+    .setup-step-body li + li { margin-top: .25rem; }
+    .setup-icon { display: grid; place-items: center; width: clamp(3rem, 7vw, 5rem); aspect-ratio: 1; border-radius: .8rem; background: #edf3fc; }
+    .setup-icon img { width: 66%; height: auto; }
+    .setup-step-body .install-video { width: 100%; max-width: 22rem; margin: 0; }
+    .setup-help { padding: .6rem .8rem; border-radius: .55rem; background: #f4f8ff; }
+    .setup-step .command { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+    .setup-step .command-toolbar { display: contents; }
+    .setup-step .command-toolbar > span:first-child { display: none; }
+    .setup-step .command-toolbar button { grid-area: 1 / 2; margin-right: .65rem; }
+    .setup-step .command-toolbar [role="status"] { grid-column: 1 / -1; grid-row: 2; padding: 0 .75rem .45rem; font-size: .8rem; }
+    .setup-step .command-toolbar [role="status"]:empty { display: none; }
+    .setup-step .command pre { grid-area: 1 / 1; color: #b3e9ff; }
+    .setup-help { margin: .85rem 0; }
+    .setup-help p { margin: .5rem 0 0; }
+    .expected-output { padding: .7rem .85rem; border-left: 3px solid #9bceff; background: #f4f8ff; }
+    .expected-output code { display: block; }
+    .setup-finish { margin-top: 1rem; padding: 1rem; }
+    .setup-finish p { margin: 0; }
+    .session-footer { width: min(calc(100% - 2.5rem), 80rem); margin: 0 auto; padding: 1.25rem 0 2rem; border-top: 1px solid var(--border); }
+    .session-footer nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .6rem 1rem; }
+    .session-footer-position { text-align: center; font-size: .9rem; }
+    .session-footer a { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 2.65rem; padding: .45rem .85rem; border: 1px solid #afc6e4; border-radius: .65rem; background: #f7faff; color: var(--blue); text-decoration: none; font-size: .85rem; font-weight: 700; }
+    #previous-session { justify-self: start; }
+    #next-session { justify-self: end; background: #164eb8; border-color: #164eb8; color: white; }
+    .session-footer a[href]:hover { text-decoration: underline; }
+    .session-footer a[aria-disabled] { background: transparent; border-color: var(--border); color: #62758e; }
+    @media (max-width: 36rem) {
+      .session-footer nav { grid-template-columns: 1fr 1fr; }
+      .session-footer-position { grid-area: 1 / 1 / 2 / -1; }
+    }
+    @media (max-width: 52rem) {
+      .setup-layout { grid-template-columns: 1fr; }
+      .setup-sidebar { position: static; }
+    }
+    @media (max-width: 58rem) {
+      .setup-step-body { grid-template-columns: auto minmax(0, 1fr); }
+      .setup-step-body .install-video { grid-column: 1 / -1; }
+    }
     @media print {
+      .session-footer { display: none; }
+      .setup-step .command-toolbar { display: none; }
+      .setup-step .command pre { color: black; }
+      .setup-sidebar { position: static; }
       .topbar, .hero-art { display: none; }
       .wrap, main { display: block; }
       .lesson[hidden] { display: block; }
@@ -180,30 +254,92 @@
     <section id="tools" class="lesson">
       <h2>Session 1 · Install your tools</h2>
       <p>Set up VS Code, Git and Node.js first. PHP, Composer and Docker have their own practice session after the first launch.</p>
-      <h3>1. Install Visual Studio Code</h3>
-      <p>Download the Windows User Installer. Run it, keep the default options including <strong>Add to PATH</strong>, and open VS Code from the Start menu. Choose <strong>Terminal → New Terminal</strong> to open a terminal inside the editor. Use PowerShell for the commands in this guide. <a href="https://code.visualstudio.com/docs/setup/windows">VS Code Windows setup</a></p>
-      <div class="install-video">
+      <div class="setup-layout">
+        <aside class="setup-sidebar" aria-label="Session 1 guide">
+          <div class="setup-panel">
+            <div class="setup-progress-heading"><h3>Your progress</h3><span id="setup-percent">0%</span></div>
+            <progress id="setup-meter" value="0" max="3" aria-label="Session 1 progress"></progress>
+            <p id="setup-count" aria-live="polite">0 of 3 checkpoints complete</p>
+          </div>
+          <nav class="setup-panel setup-tasks" aria-labelledby="setup-checklist">
+            <h3 id="setup-checklist">Session 1 tasks</h3>
+            <ol>
+              <li><a href="#setup-vscode" aria-current="step">Install Visual Studio Code</a></li>
+              <li><a href="#setup-git">Install Git</a></li>
+              <li><a href="#setup-node">Install Node.js and npm</a></li>
+            </ol>
+          </nav>
+          <div class="setup-panel setup-tips">
+            <h3>Tips for this session</h3>
+            <ul>
+              <li>Use a Windows computer.</li>
+              <li>Keep the default installation options.</li>
+              <li>Restart VS Code after installing each tool.</li>
+            </ul>
+          </div>
+        </aside>
+        <div>
+      <article class="setup-step" id="setup-vscode">
+      <div class="setup-step-heading"><h3><span>1</span> Install Visual Studio Code</h3><span class="setup-duration">About 5&ndash;10 min</span></div>
+      <div class="setup-step-body">
+        <div class="setup-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/icons/vscode/vscode-original.svg" width="64" height="64" alt=""></div>
+        <ol>
+          <li>Download the <strong>Windows User Installer</strong> from the <a href="https://code.visualstudio.com/docs/setup/windows">VS Code Windows setup guide</a>.</li>
+          <li>Run the installer and keep the default options, including <strong>Add to PATH</strong>.</li>
+          <li>Open VS Code from Start. Choose <strong>Terminal → New Terminal</strong> and select <strong>PowerShell</strong> if another shell opens.</li>
+        </ol>
+        <div class="install-video">
         <iframe src="https://www.youtube-nocookie.com/embed/1W0hL6_uX9A" referrerpolicy="strict-origin-when-cross-origin" title="VS Code installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+          </div>
       </div>
+      <p class="expected-output"><strong>What you should see</strong><br>A terminal panel opens with a PowerShell prompt starting with <code style="display:inline">PS</code>.</p>
+      <details class="setup-help"><summary>Where do I open the terminal in VS Code?</summary><p>Use <strong>Terminal → New Terminal</strong> in the top menu. Use the dropdown next to the <strong>+</strong> in the terminal panel to open a PowerShell terminal.</p></details>
       <label><input id="vscode" type="checkbox"> I can open VS Code and its PowerShell terminal.</label>
+      </article>
 
-      <h3>2. Install Git</h3>
-      <p>Git downloads and tracks project code. Download Git for Windows, choose the installer for your computer, and keep the default option that makes Git available from the command line. Close and reopen VS Code after installing. <a href="https://git-scm.com/install/windows">Git for Windows</a></p>
-      <div class="install-video">
+      <article class="setup-step" id="setup-git">
+      <div class="setup-step-heading"><h3><span>2</span> Install Git</h3><span class="setup-duration">About 5&ndash;10 min</span></div>
+      <div class="setup-step-body">
+        <div class="setup-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/icons/git/git-original.svg" width="64" height="64" alt=""></div>
+        <ol>
+          <li>Download the installer for your computer from <a href="https://git-scm.com/install/windows">Git for Windows</a>.</li>
+          <li>Run it and keep the default option that makes Git available from the command line.</li>
+          <li>Close and reopen VS Code. Open PowerShell and run the command below.</li>
+        </ol>
+        <div class="install-video">
         <iframe src="https://www.youtube-nocookie.com/embed/TT8ktVp5j-k" referrerpolicy="strict-origin-when-cross-origin" title="Git installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+          </div>
       </div>
       <pre><code>git --version</code></pre>
+      <p class="expected-output"><strong>Example result</strong><code>git version 2.52.0.windows.1</code>Your installed version may differ.</p>
+      <details class="setup-help"><summary>Git is not recognised in PowerShell</summary><p>Close all VS Code windows, reopen VS Code, and try again in a new PowerShell terminal. If it still fails, rerun the Git installer and check that Git is available from the command line.</p></details>
       <label><input id="git" type="checkbox"> The terminal prints a Git version.</label>
+      </article>
 
-      <h3>3. Install Node.js and npm</h3>
-      <p>Node.js runs the development tools. npm installs the JavaScript packages the project uses. Select the Node.js 24 LTS release line used in this walkthrough, download the Windows installer (.msi) for your computer, and keep npm and PATH enabled in the installer. Close and reopen VS Code again. <a href="https://nodejs.org/en/download">Node.js downloads</a></p>
-      <div class="install-video">
+      <article class="setup-step" id="setup-node">
+      <div class="setup-step-heading"><h3><span>3</span> Install Node.js and npm</h3><span class="setup-duration">About 5&ndash;10 min</span></div>
+      <div class="setup-step-body">
+        <div class="setup-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/icons/nodejs/nodejs-original.svg" width="64" height="64" alt=""></div>
+        <ol>
+          <li>Select Node.js 24 LTS and download the Windows installer (.msi) from <a href="https://nodejs.org/en/download">Node.js downloads</a>.</li>
+          <li>Run the installer with npm and PATH enabled.</li>
+          <li>Close and reopen VS Code. Open PowerShell and run each line below separately.</li>
+        </ol>
+        <div class="install-video">
         <iframe src="https://www.youtube-nocookie.com/embed/tHthqaBHjeE" referrerpolicy="strict-origin-when-cross-origin" title="Node.js and npm installation tutorial for Windows" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+          </div>
       </div>
-      <p>Run each line separately by pressing Enter. Use <code>npm.cmd</code> in PowerShell to run the Windows npm launcher.</p>
       <pre><code>node --version
 npm.cmd --version</code></pre>
+      <div class="expected-output"><strong>Example results</strong><code>v24.21.0</code><code>11.19.0</code>Node.js should start with v24. Your exact versions may differ.</div>
+      <details class="setup-help"><summary>PowerShell blocks npm</summary><p>If <code>npm --version</code> reports that scripts are disabled, use <code>npm.cmd --version</code>. This runs the Windows npm launcher with your current PowerShell settings.</p></details>
       <label><input id="node" type="checkbox"> Node prints a version beginning with v24 and npm prints its own version.</label>
+      </article>
+      <div class="before-start setup-finish">
+        <p id="setup-finish" aria-live="polite">Complete all three checkpoints to finish this session.</p>
+      </div>
+        </div>
+      </div>
     </section>
 
     <section id="clone" class="lesson">
@@ -338,12 +474,34 @@ docker compose version</code></pre>
       <label><input id="docker" type="checkbox"> Docker Desktop is running and both Docker checks work.</label>
     </section>
   </main>
+  <footer class="session-footer" id="session-footer" hidden>
+    <nav aria-label="Session navigation">
+      <a id="previous-session"><span aria-hidden="true">←</span> Previous Session</a>
+      <strong class="session-footer-position" id="session-position"></strong>
+      <a id="next-session">Next Session <span aria-hidden="true">→</span></a>
+    </nav>
+  </footer>
   <script>
     const lessons = [...document.querySelectorAll('.lesson')]
     const session = new URLSearchParams(location.search).get('session')
     const activeLesson = lessons.find(lesson => lesson.id === session)
     for (const lesson of lessons) lesson.hidden = lesson !== activeLesson
     if (activeLesson) {
+      const position = lessons.indexOf(activeLesson)
+      document.querySelector('#session-position').textContent = 'Session ' + (position + 1) + ' of ' + lessons.length
+      const previous = document.querySelector('#previous-session')
+      const next = document.querySelector('#next-session')
+      if (position > 0) previous.href = '?session=' + lessons[position - 1].id
+      else {
+        previous.setAttribute('role', 'link')
+        previous.setAttribute('aria-disabled', 'true')
+      }
+      if (position < lessons.length - 1) next.href = '?session=' + lessons[position + 1].id
+      else {
+        next.href = 'index.html#sessions'
+        next.textContent = 'Course outline'
+      }
+      document.querySelector('#session-footer').hidden = false
       document.querySelector('#start').hidden = true
       document.querySelector('#sessions').hidden = true
       document.title = activeLesson.querySelector('h2').textContent + ' | Konek Story Training'
@@ -362,7 +520,7 @@ docker compose version</code></pre>
     }
 
     if (navigator.clipboard?.writeText) {
-      for (const code of document.querySelectorAll('#clone pre > code')) {
+      for (const code of document.querySelectorAll('#tools pre > code, #clone pre > code')) {
         const block = code.parentElement
         const wrapper = document.createElement('div')
         wrapper.className = 'command'
@@ -395,6 +553,23 @@ docker compose version</code></pre>
     const progressPercent = document.querySelector('#checkpoint-percent')
     const storageKey = 'konek-story-training-progress-v1'
     const continueCourse = document.querySelector('#continue-course')
+    const setupChecks = [...document.querySelectorAll('#tools input[type="checkbox"]')]
+    const setupMeter = document.querySelector('#setup-meter')
+    const setupPercent = document.querySelector('#setup-percent')
+    const setupCount = document.querySelector('#setup-count')
+    const setupFinish = document.querySelector('#setup-finish')
+    const setupTasks = [...document.querySelectorAll('.setup-tasks a')].map(link => ({
+      link, check: document.querySelector(link.hash + ' input[type="checkbox"]')
+    }))
+    function highlightSetupTask() {
+      const current = setupTasks.find(({ link }) => link.hash === location.hash) ?? setupTasks[0]
+      for (const task of setupTasks) {
+        if (task === current) task.link.setAttribute('aria-current', 'step')
+        else task.link.removeAttribute('aria-current')
+      }
+    }
+    highlightSetupTask()
+    window.addEventListener('hashchange', highlightSetupTask)
     document.querySelector('#course-total').textContent = lessons.length + ' sessions · ' + checks.length + ' checkpoints'
     const sessionProgress = [...document.querySelectorAll('.session-list a')].map(link => {
       const lesson = document.getElementById(new URL(link.href).searchParams.get('session'))
@@ -408,6 +583,15 @@ docker compose version</code></pre>
     })
 
     function showProgress() {
+      const setupDone = setupChecks.filter(check => check.checked).length
+      setupMeter.max = setupChecks.length
+      setupMeter.value = setupDone
+      setupPercent.textContent = Math.round(setupDone / setupChecks.length * 100) + '%'
+      for (const { link, check } of setupTasks) link.toggleAttribute('data-complete', check.checked)
+      setupCount.textContent = setupDone + ' of ' + setupChecks.length + ' checkpoints complete'
+      setupFinish.textContent = setupDone === setupChecks.length
+        ? 'Session 1 complete. You’re ready to clone Konek Story.'
+        : 'Complete all three checkpoints to finish this session.'
       const complete = checks.filter(check => check.checked).length
       progress.textContent = `${complete} of ${checks.length} checkpoints complete`
       const percent = complete / checks.length * 100
