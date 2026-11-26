@@ -105,7 +105,7 @@
       .wrap, main { grid-template-columns: minmax(0, 1fr); }
       .progress-card { max-width: 23rem; justify-self: start; }
     }
-    #tools, #clone { width: min(100%, 80rem); }
+    #tools, #clone, #run { width: min(100%, 80rem); }
     .setup-layout { display: grid; grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr); align-items: start; gap: 1.25rem; }
     .setup-sidebar { position: sticky; top: 5rem; display: grid; gap: .65rem; }
     .setup-panel { padding: 1rem; border: 1px solid var(--border); border-radius: .85rem; background: #f8fbff; }
@@ -155,7 +155,7 @@
     .expected-output code { display: block; }
     .clone-example { display: grid; grid-template-columns: minmax(0, 1fr) minmax(10rem, .45fr); align-items: start; gap: 1rem; }
     .clone-example > .expected-output { margin: 0; }
-    #clone .setup-tips h3 { display: flex; gap: .45rem; align-items: center; }
+    .setup-tips h3 { display: flex; gap: .45rem; align-items: center; }
     .clone-lead { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 1rem; }
     .clone-lead p { margin-top: 0; }
     .clone-icon { display: grid; place-items: center; width: clamp(3rem, 6vw, 5rem); aspect-ratio: 1; border-radius: .8rem; background: linear-gradient(145deg, #edf5ff, #d2e3fc); font-size: clamp(1.35rem, 3vw, 2.5rem); }
@@ -169,6 +169,16 @@
     .clone-folder span { font-size: 2.3rem; line-height: 1.15; }
     .clone-status code { display: block; }
     .clone-result { margin-bottom: .75rem; }
+    .run-result { margin: .75rem 0; padding: .85rem; border: 1px solid #abdac5; border-radius: .65rem; background: #e9f8ef; }
+    .run-result p { margin: 0; }
+    .run-result pre { margin: .5rem 0 0; color: #b6f3c7; }
+    .run-result-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(8rem, .5fr); align-items: center; gap: .75rem; }
+    .run-result img { display: block; width: 100%; max-width: 13rem; height: auto; justify-self: center; }
+    .setup-step #help { margin-bottom: 1rem; }
+    .run-help-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: .75rem; }
+    .run-help-grid details { margin: 0; padding: .6rem .75rem; border: 1px solid var(--border); border-radius: .5rem; background: #f4f8ff; }
+    .run-help-grid p { margin: .45rem 0 0; }
+    .run-stop-icon { background: #fcecf0; color: #b72736; }
     .clone-wrap-up details { padding: .65rem .85rem; border: 1px solid var(--border); border-radius: .55rem; }
     .setup-finish { margin-top: 1rem; padding: 1rem; }
     .setup-finish p { margin: 0; }
@@ -190,8 +200,12 @@
     }
     @media (max-width: 58rem) {
       .clone-example { grid-template-columns: 1fr; }
+      .run-result-grid { grid-template-columns: 1fr; }
       .setup-step-body { grid-template-columns: auto minmax(0, 1fr); }
       .setup-step-body .install-video { grid-column: 1 / -1; }
+    }
+    @media (max-width: 38rem) {
+      .run-help-grid { grid-template-columns: 1fr; }
     }
     @media print {
       .session-footer { display: none; }
@@ -485,25 +499,87 @@ git status</code></pre>
 
     <section id="run" class="lesson">
       <h2>Session 3 · Start the app</h2>
-      <p>Use PowerShell inside <strong>konek-story</strong>. Confirm the terminal is in the right folder before installing anything.</p>
+      <p>Install the project packages, open Konek Story in your browser, and practice restarting it.</p>
+      <div class="setup-layout">
+        <aside class="setup-sidebar" aria-label="Session 3 guide">
+          <div class="setup-panel">
+            <div class="setup-progress-heading"><h3>Your progress</h3><span class="lesson-percent">0%</span></div>
+            <progress class="lesson-meter" value="0" max="3" aria-label="Session 3 progress"></progress>
+            <p class="lesson-count" aria-live="polite">0 of 3 checkpoints complete</p>
+          </div>
+          <nav class="setup-panel setup-tasks" aria-labelledby="run-checklist">
+            <h3 id="run-checklist">Session 3 tasks</h3>
+            <ol>
+              <li><a href="#run-install" aria-current="step">Install project packages</a></li>
+              <li><a href="#run-start">Start the development server</a></li>
+              <li><a href="#run-restart">Stop and restart it</a></li>
+            </ol>
+          </nav>
+          <div class="setup-panel setup-tips">
+            <h3><span aria-hidden="true">💡</span> Tips for this session</h3>
+            <ul>
+              <li>Run the commands inside <code>konek-story</code>.</li>
+              <li>Wait for package installation to finish successfully before starting the server.</li>
+              <li>Open the exact <strong>Local</strong> URL Vite prints.</li>
+            </ul>
+          </div>
+        </aside>
+        <div>
+      <article class="setup-step" id="run-install">
+      <div class="setup-step-heading"><h3><span>1</span> Install the project packages</h3></div>
+      <div class="clone-lead">
+      <div class="clone-icon" aria-hidden="true">📦</div>
+      <div>
+      <details class="setup-help">
+      <summary>Check that PowerShell is in the project folder</summary>
       <pre><code>Get-Location
 Test-Path package.json</code></pre>
       <p>The path should end in <code>konek-story</code> and the second command should print <code>True</code>.</p>
-      <h3>1. Install the project packages</h3>
+      </details>
       <pre><code>npm.cmd ci</code></pre>
       <p>This installs the exact package versions recorded in <code>package-lock.json</code>. It also runs the project's setup scripts for icons and the mock API worker. The first install can take a few minutes. Wait for the prompt to return before continuing.</p>
+      <div class="run-result"><strong>Expected result</strong><p>npm finishes successfully. The package count and time may differ.</p><pre>added 1103 packages in 42s</pre></div>
+      </div>
+      </div>
       <label><input id="packages" type="checkbox"> The package install completed successfully.</label>
-      <h3>2. Start the development server</h3>
+      </article>
+      <article class="setup-step" id="run-start">
+      <div class="setup-step-heading"><h3><span>2</span> Start the development server</h3></div>
+      <div class="clone-lead">
+      <div class="clone-icon" aria-hidden="true">▶</div>
+      <div>
       <pre><code>npm.cmd run dev -- --host 127.0.0.1</code></pre>
       <p>Keep the terminal open. When Vite prints <strong>Local</strong>, open that address in your browser. It is usually <a href="http://127.0.0.1:5173/">http://127.0.0.1:5173/</a>. If Vite lists a different port, use the address it printed.</p>
-      <h3>3. Stop and restart it</h3>
+      <div class="run-result run-result-grid">
+        <div><strong>Expected result</strong><p>Vite prints a local address and Konek Story opens in your browser.</p>
+          <pre>VITE v7.2.2  ready in 5079 ms
+➜  Local: http://127.0.0.1:5173/</pre>
+        </div>
+        <img src="session-3-browser.png" alt="" loading="lazy">
+      </div>
+      </div>
+      </div>
+      <label><input id="app-opened" type="checkbox"> I can open the app in my browser.</label>
+      </article>
+      <article class="setup-step" id="run-restart">
+      <div class="setup-step-heading"><h3><span>3</span> Stop and restart it</h3></div>
+      <div class="clone-lead">
+      <div class="clone-icon run-stop-icon" aria-hidden="true">■</div>
       <p>Click the terminal and press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the server. If Windows asks whether to terminate the batch job, enter <code>Y</code>. Run the same start command again and refresh your browser. On a normal return visit, open the existing clone and run the start command. Run <code>npm.cmd ci</code> again after the dependency files change.</p>
-      <label><input id="running" type="checkbox"> I can open the app in my browser, stop it and start it again.</label>
+      </div>
+      <label><input id="running" type="checkbox"> I can stop the app and start it again.</label>
+      </article>
+      <article class="setup-step">
       <h3 id="help">If you get stuck</h3>
+      <div class="run-help-grid">
       <details><summary>PowerShell cannot find a command</summary><p>Close all VS Code windows and reopen the editor. Repeat that tool's version check. For npm, use <code>npm.cmd</code>.</p></details>
       <details><summary>Git reports “repository not found”</summary><p>Open the GitHub link in your browser and check that you are signed into the account your mentor granted access to.</p></details>
       <details><summary>npm cannot find package.json</summary><p>Run <code>Get-Location</code> and open the <strong>konek-story</strong> folder in VS Code. Open a new terminal and repeat the folder check.</p></details>
       <details><summary>The browser cannot reach the app</summary><p>Check that Vite is still running and use the exact address it printed. If installation or startup failed, bring your mentor the command you ran and the first error message.</p></details>
+      </div>
+      </article>
+        </div>
+      </div>
     </section>
 
     <section id="later" class="lesson">
@@ -593,7 +669,7 @@ docker compose version</code></pre>
     }
 
     if (navigator.clipboard?.writeText) {
-      for (const code of document.querySelectorAll('#tools pre > code, #clone pre > code')) {
+      for (const code of document.querySelectorAll('#tools pre > code, #clone pre > code, #run pre > code')) {
         const block = code.parentElement
         const wrapper = document.createElement('div')
         wrapper.className = 'command'
@@ -624,7 +700,7 @@ docker compose version</code></pre>
     const progress = document.querySelector('#progress')
     const progressRing = document.querySelector('#checkpoint-ring')
     const progressPercent = document.querySelector('#checkpoint-percent')
-    const storageKey = 'konek-story-training-progress-v1'
+    const storageKey = 'konek-story-training-progress-v2'
     const continueCourse = document.querySelector('#continue-course')
     const setupChecks = [...document.querySelectorAll('#tools input[type="checkbox"]')]
     const setupFinish = document.querySelector('#setup-finish')
@@ -692,7 +768,9 @@ docker compose version</code></pre>
     }
 
     try {
-      const saved = JSON.parse(localStorage.getItem(storageKey) || '[]')
+      const current = localStorage.getItem(storageKey)
+      const saved = JSON.parse(current ?? localStorage.getItem('konek-story-training-progress-v1') ?? '[]')
+      if (current === null && saved.includes('running')) saved.push('app-opened')
       checks.forEach(check => { check.checked = saved.includes(check.id) })
     } catch {
       // The checklist also works when browser storage is unavailable.
