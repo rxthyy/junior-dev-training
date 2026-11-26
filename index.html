@@ -9,22 +9,23 @@
     :root { --navy: #132639; --blue: #174e91; --border: #d6e0eb; --pale-blue: #e9f3ff; }
     body { margin: 0; background: #f1f5f9; color: var(--navy); font: 1rem/1.65 system-ui, sans-serif; }
     header { background: var(--navy); color: #fff; padding: clamp(2.5rem, 6vw, 4rem) 1rem 3rem; }
-    .wrap { max-width: 67rem; margin: auto; }
+    .wrap { max-width: 67rem; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2rem; }
     main { max-width: 58rem; margin: auto; }
     h1, h2, h3 { line-height: 1.2; }
     h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.035em; }
     .eyebrow { margin: 0 0 1rem; color: #9bceff; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; }
     .intro { max-width: 45rem; margin: 1.25rem 0; color: #dce9f7; }
-    .topics, .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: .85rem; }
+    .topics { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: .85rem; }
     .topics { margin: 0 0 1rem; padding: 0; list-style: none; }
     .topics li { margin: 0; border: 1px solid #52677c; border-radius: 999px; padding: .3rem .75rem; }
-    .header-actions { gap: .75rem; }
-    .header-actions p { margin: 0; }
-    #print { background: #fff; color: #163453; border: 1px solid #a9c2df; border-radius: .45rem; padding: .65rem .95rem; }
-    #print:hover { background: var(--pale-blue); }
-    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.25rem; padding: .9rem 1rem; background: #fff; border-bottom: 1px solid var(--border); font-size: .9rem; }
-    nav a { text-decoration: none; }
-    nav a:hover, nav a:focus-visible { text-decoration: underline; }
+    .progress-card { margin: 0; justify-self: end; width: min(100%, 15rem); padding: 1.4rem; text-align: center; background: #1a3249; border: 1px solid #52677c; border-radius: 1rem; }
+    .progress-ring { display: grid; place-items: center; width: min(100%, 8rem); aspect-ratio: 1; margin: 0 auto .85rem; border-radius: 50%; background: conic-gradient(#9bceff var(--completion, 0%), #52677c 0); }
+    .progress-ring span { display: grid; place-items: center; width: 82%; aspect-ratio: 1; border-radius: 50%; background: #1a3249; font-size: 1.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .progress-card figcaption { color: #dce9f7; font-size: .85rem; }
+    @media (max-width: 46rem) {
+      .wrap { grid-template-columns: minmax(0, 1fr); }
+      .progress-card { justify-self: start; }
+    }
     a { color: var(--blue); }
     main { padding: 1rem; }
     section { background: white; border: 1px solid var(--border); border-radius: .75rem; margin: 1rem 0; padding: clamp(1rem, 4vw, 2rem); }
@@ -39,12 +40,44 @@
     details + details { margin-top: .65rem; }
     .install-video { margin: 1.25rem 0; overflow: hidden; border: 1px solid var(--border); border-radius: .75rem; background: var(--navy); }
     .install-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+    .command { margin: 1rem 0; border-radius: .5rem; background: var(--navy); color: white; }
+    .command-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding: .45rem .75rem; border-bottom: 1px solid #52677c; font-size: .85rem; }
+    .command-toolbar button { background: var(--pale-blue); color: var(--navy); border: 0; border-radius: .3rem; }
+    .command pre { margin: 0; }
+    .git-question { margin: 1rem 0; padding: .7rem 1rem; border: 1px solid var(--border); border-radius: .5rem; }
+    .session-list { list-style: none; padding: 0; margin-bottom: 0; }
+    .session-list a { display: flex; flex-wrap: wrap; gap: .25rem 1rem; align-items: center; padding: .85rem 1rem; border: 1px solid var(--border); border-radius: .55rem; text-decoration: none; }
+    .session-list a > span { color: var(--navy); flex: 1 1 12rem; }
+    .session-list .session-progress { flex: 0 0 auto; margin-left: auto; padding: .15rem .55rem; border-radius: 999px; background: var(--pale-blue); color: var(--blue); font-size: .85rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+    .session-list a:hover, .session-list a:focus-visible { background: var(--pale-blue); border-color: var(--blue); }
+    .lesson-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      min-height: 2.75rem;
+      margin-bottom: 1.35rem;
+      padding: .4rem .85rem .4rem .55rem;
+      border: 1px solid var(--border);
+      border-radius: .65rem;
+      background: #f8fbff;
+      color: var(--blue);
+      font-size: .9rem;
+      font-weight: 650;
+      text-decoration: none;
+    }
+    .lesson-back:hover { background: var(--pale-blue); border-color: #a9c2df; }
+    .lesson-back:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    .lesson-back-icon { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; border-radius: .4rem; background: var(--pale-blue); font-size: 1.1rem; }
     @media print {
+      .lesson[hidden] { display: block; }
+      .lesson-back { display: none; }
       .install-video { display: none; }
+      .command-toolbar { display: none; }
+      .progress-card { display: none; }
       body, header, section { background: white; color: black; }
       .eyebrow, .intro { color: black; }
       label { background: #eee; }
-      nav, button { display: none; }
+      button { display: none; }
       section { border: 0; padding: .5rem 0; }
       pre { background: #eee; color: black; break-inside: avoid; }
     }
@@ -53,28 +86,39 @@
 <body>
   <header>
     <div class="wrap">
-      <p class="eyebrow">Junior developer onboarding</p>
-      <h1>Run Konek Story<br>on your computer</h1>
-      <p class="intro">Install your development tools, clone the project and run it on Windows. Work through one checkpoint at a time with your mentor.</p>
-      <ul class="topics" aria-label="Training format">
-        <li>5 sessions</li>
-        <li>Windows + PowerShell</li>
-        <li>Git + local development</li>
-      </ul>
-      <div class="header-actions">
-        <button id="print" type="button">Print / Save as PDF</button>
-        <p id="progress" aria-live="polite"></p>
+      <div>
+        <p class="eyebrow">Junior developer onboarding</p>
+        <h1>Run Konek Story<br>on your computer</h1>
+        <p class="intro">Install your development tools, clone the project and run it on Windows. Work through one checkpoint at a time with your mentor.</p>
+        <ul class="topics" aria-label="Training format">
+          <li>5 sessions</li>
+          <li>Windows + PowerShell</li>
+          <li>Git + local development</li>
+        </ul>
       </div>
+      <figure class="progress-card" aria-label="Training progress">
+        <div class="progress-ring" id="checkpoint-ring" aria-hidden="true"><span id="checkpoint-percent">0%</span></div>
+        <figcaption id="progress" aria-live="polite"></figcaption>
+      </figure>
     </div>
   </header>
-  <nav aria-label="Training sections">
-    <a href="#tools">Install tools</a>
-    <a href="#clone">Clone the repository</a>
-    <a href="#run">Run the app</a>
-    <a href="#later">PHP, Composer and Docker</a>
-  </nav>
   <main>
-    <section id="tools">
+    <section id="start" aria-labelledby="start-heading">
+      <h2 id="start-heading">Start here · Your first local project</h2>
+      <p>This guide is for junior developers setting up a Windows development environment for the first time. You’ll practice the workflow you’ll use when joining a project: set up your tools, get the code from GitHub, and run it on your own computer. Konek Story is the practice project.</p>
+      <p>Work through one session at a time. Run the commands in VS Code’s PowerShell terminal and check off each item once you’ve verified the result. Your progress is saved in this browser.</p>
+    </section>
+    <section id="sessions" aria-labelledby="sessions-heading">
+      <h2 id="sessions-heading">Course outline</h2>
+      <ol class="session-list">
+        <li><a href="?session=tools"><strong>Session 1</strong><span>Install your tools</span></a></li>
+        <li><a href="?session=clone"><strong>Session 2</strong><span>Set up Git and clone Konek Story</span></a></li>
+        <li><a href="?session=run"><strong>Session 3</strong><span>Run Konek Story locally</span></a></li>
+        <li><a href="?session=later"><strong>Session 4</strong><span>Install PHP and Composer</span></a></li>
+        <li><a href="?session=docker-session"><strong>Session 5</strong><span>Install Docker Desktop</span></a></li>
+      </ol>
+    </section>
+    <section id="tools" class="lesson">
       <h2>Session 1 · Install your tools</h2>
       <p>Set up VS Code, Git and Node.js first. PHP, Composer and Docker have their own practice session after the first launch.</p>
       <h3>1. Install Visual Studio Code</h3>
@@ -103,8 +147,9 @@ npm.cmd --version</code></pre>
       <label><input id="node" type="checkbox"> Node prints a version beginning with v24 and npm prints its own version.</label>
     </section>
 
-    <section id="clone">
+    <section id="clone" class="lesson">
       <h2>Session 2 · Get your own copy of the project</h2>
+      <p><strong>Your goal:</strong> Open your own copy of Konek Story in VS Code and use Git to confirm you’re in the right folder.</p>
       <h3>Set up your Git name and email</h3>
       <p>Open PowerShell in VS Code. Git records this name and email on your commits. Replace both examples with your name and the email you use for GitHub. If you keep your email private, copy your GitHub-provided <code>noreply</code> address from your account settings. GitHub may ask you to sign in separately when you clone or push.</p>
       <pre><code>git config --global user.name "Your Name"
@@ -112,6 +157,7 @@ git config --global user.email "you@example.com"</code></pre>
       <p><code>--global</code> sets the defaults for repositories you use under your Windows account. Check that Git saved the values you intended.</p>
       <pre><code>git config --global --get user.name
 git config --global --get user.email</code></pre>
+      <p><strong>What you should see:</strong> Your name appears after the first command and your email after the second.</p>
       <label><input id="git-identity" type="checkbox"> Git shows the name and email I want on my commits.</label>
 
       <h3>Clone Konek Story</h3>
@@ -132,6 +178,11 @@ git status</code></pre>
         </li>
       </ol>
       <label><input id="cloned" type="checkbox"> I can find package.json and run git status in my clone.</label>
+      <details class="git-question">
+        <summary>Quick check · What does git clone give you?</summary>
+        <p>Think about what you’d need to see who changed a file before you joined the project.</p>
+        <p><strong>Answer:</strong> A local copy of the project and its Git history. Run <code>git log -1 --oneline</code> inside <strong>konek-story</strong> to see the latest commit on your current branch.</p>
+      </details>
       <details>
         <summary>Practice basic Git commands after the app runs</summary>
         <p>Start in the <strong>konek-story</strong> folder. Run these one at a time to inspect your local copy.</p>
@@ -141,18 +192,30 @@ git status</code></pre>
           <li><code>git log -5 --oneline</code> shows up to five recent commits.</li>
           <li><code>git diff</code> shows edits to tracked files that you have yet to stage.</li>
         </ul>
-        <p>For a first local commit, use a clean checkout and create a practice branch.</p>
-        <pre><code>git switch -c practice/first-commit</code></pre>
-        <p>In VS Code, create <code>git-practice.txt</code> in the project folder, write one sentence, and save it. Then run each line separately.</p>
-        <pre><code>git add git-practice.txt
-git status --short
-git commit -m "Add Git practice note"
-git log -1 --oneline</code></pre>
-        <p><code>git add</code> stages the practice file. Before committing, check that it is the only staged file. <code>git commit</code> saves the staged changes in your local Git history. The last command shows your new commit.</p>
+        <h3>1. Update your starting branch</h3>
+        <p>Start on the branch you cloned and check that <code>git status --short</code> is empty. If it shows changes, review them with your mentor before pulling.</p>
+        <pre><code>git pull --ff-only</code></pre>
+        <p><code>git pull</code> downloads and brings in commits from the current branch’s upstream branch. <code>--ff-only</code> updates your branch when Git can move it forward directly. If Git reports that the branches have diverged, pause and ask your mentor to review the branch history with you.</p>
+        <h3>2. Create a practice branch</h3>
+        <pre><code>git checkout -b practice/first-commit</code></pre>
+        <p><code>git checkout -b</code> creates a branch from your current commit and switches to it. Use <code>git branch --show-current</code> to confirm you’re on <code>practice/first-commit</code>.</p>
+        <h3>3. Stage and review one file</h3>
+        <p>In VS Code, create <code>git-practice.txt</code> in the project folder, write one sentence, and save it.</p>
+        <pre><code>git add git-practice.txt</code></pre>
+        <p><code>git add</code> stages the file’s current contents for the next commit. If you edit it again, run <code>git add</code> again to include the new edits.</p>
+        <pre><code>git diff --cached</code></pre>
+        <p><code>git diff --cached</code> shows what is staged. Check that it contains only the practice file. If the terminal shows <code>(END)</code>, press <kbd>Q</kbd> to exit the viewer.</p>
+        <h3>4. Save a local commit</h3>
+        <pre><code>git commit -m "Add Git practice note"</code></pre>
+        <p><code>git commit</code> saves the staged changes to your local branch history. <code>-m</code> sets the commit message. Run <code>git log -1 --oneline</code> to confirm your commit appears.</p>
+        <h3>5. Push to a practice remote</h3>
+        <p>Use a fork or practice repository where your mentor has given you permission to push. Run <code>git remote -v</code> to check where <code>origin</code> points. Run the example only if its push URL is your approved practice repository. You can finish the exercise with a local commit if you don’t have a practice remote yet.</p>
+        <pre><code>git push -u origin practice/first-commit</code></pre>
+        <p><code>git push</code> uploads your commits to the named remote branch. <code>origin</code> is the remote name, and <code>-u</code> sets the upstream so future <code>git push</code> and <code>git pull</code> commands on this branch know which remote branch to use.</p>
       </details>
     </section>
 
-    <section id="run">
+    <section id="run" class="lesson">
       <h2>Session 3 · Start the app</h2>
       <p>Use PowerShell inside <strong>konek-story</strong>. Confirm the terminal is in the right folder before installing anything.</p>
       <pre><code>Get-Location
@@ -175,10 +238,9 @@ Test-Path package.json</code></pre>
       <details><summary>The browser cannot reach the app</summary><p>Check that Vite is still running and use the exact address it printed. If installation or startup failed, bring your mentor the command you ran and the first error message.</p></details>
     </section>
 
-    <section id="later">
-      <h2>Follow-up sessions · PHP, Composer and Docker</h2>
-      <p>Konek Story's first launch uses Git, Node.js and npm. Install the following tools in separate sessions when the team is ready to introduce PHP projects and containers.</p>
-      <h3>Session 4 · Install PHP, then Composer</h3>
+    <section id="later" class="lesson">
+      <h2>Session 4 · Install PHP and Composer</h2>
+      <p>Complete this session when you’re ready to work with PHP projects.</p>
       <ol>
         <li>Ask your mentor which PHP version the team's backend uses. Download that Windows build from PHP, extract it to a folder you can write to, and add the folder containing <code>php.exe</code> to your user <strong>Path</strong> in Windows Environment Variables. Open a fresh PowerShell window and check the version. <a href="https://windows.php.net/download/">PHP for Windows</a>
           <div class="install-video">
@@ -194,7 +256,11 @@ Test-Path package.json</code></pre>
         </li>
       </ol>
       <label><input id="composer" type="checkbox"> PHP and Composer both print a version.</label>
-      <h3>Session 5 · Install Docker Desktop</h3>
+    </section>
+
+    <section id="docker-session" class="lesson">
+      <h2>Session 5 · Install Docker Desktop</h2>
+      <p>Use this session to prepare for container work after running Konek Story locally.</p>
       <ol>
         <li>Ask your mentor or IT to confirm that your computer meets the Windows, virtualization and WSL 2 requirements. If WSL needs setup, follow Microsoft's guide with them and restart if prompted. <a href="https://learn.microsoft.com/en-us/windows/wsl/install">Install WSL</a>
           <div class="install-video">
@@ -214,13 +280,78 @@ docker compose version</code></pre>
     </section>
   </main>
   <script>
+    const lessons = [...document.querySelectorAll('.lesson')]
+    const session = new URLSearchParams(location.search).get('session')
+    const activeLesson = lessons.find(lesson => lesson.id === session)
+    for (const lesson of lessons) lesson.hidden = lesson !== activeLesson
+    if (activeLesson) {
+      document.querySelector('#start').hidden = true
+      document.querySelector('#sessions').hidden = true
+      document.title = activeLesson.querySelector('h2').textContent + ' | Konek Story Training'
+      const back = document.createElement('a')
+      back.className = 'lesson-back'
+      back.href = 'index.html#sessions'
+      const arrow = document.createElement('span')
+      arrow.className = 'lesson-back-icon'
+      arrow.setAttribute('aria-hidden', 'true')
+      arrow.textContent = '←'
+      back.append(arrow, 'Back to course outline')
+      activeLesson.prepend(back)
+    }
+
+    if (navigator.clipboard?.writeText) {
+      for (const code of document.querySelectorAll('#clone pre > code')) {
+        const block = code.parentElement
+        const wrapper = document.createElement('div')
+        wrapper.className = 'command'
+        const toolbar = document.createElement('div')
+        toolbar.className = 'command-toolbar'
+        const shell = document.createElement('span')
+        shell.textContent = 'PowerShell'
+        const copy = document.createElement('button')
+        copy.type = 'button'
+        copy.textContent = 'Copy'
+        const status = document.createElement('span')
+        status.setAttribute('role', 'status')
+        copy.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(code.textContent)
+            status.textContent = 'Copied'
+          } catch {
+            status.textContent = 'Select the command and press Ctrl+C.'
+          }
+        })
+        toolbar.append(shell, status, copy)
+        block.before(wrapper)
+        wrapper.append(toolbar, block)
+      }
+    }
+
     const checks = [...document.querySelectorAll('input[type="checkbox"]')]
     const progress = document.querySelector('#progress')
+    const progressRing = document.querySelector('#checkpoint-ring')
+    const progressPercent = document.querySelector('#checkpoint-percent')
     const storageKey = 'konek-story-training-progress-v1'
+    const sessionProgress = [...document.querySelectorAll('.session-list a')].map(link => {
+      const lesson = document.getElementById(new URL(link.href).searchParams.get('session'))
+      const badge = document.createElement('span')
+      badge.className = 'session-progress'
+      link.append(badge)
+      return { badge, checkpoints: [...lesson.querySelectorAll('input[type="checkbox"]')] }
+    })
 
     function showProgress() {
       const complete = checks.filter(check => check.checked).length
       progress.textContent = `${complete} of ${checks.length} checkpoints complete`
+      const percent = complete / checks.length * 100
+      progressRing.style.setProperty('--completion', percent + '%')
+      progressPercent.textContent = Math.round(percent) + '%'
+      for (const { badge, checkpoints } of sessionProgress) {
+        const done = checkpoints.filter(check => check.checked).length
+        const percentage = Math.round(done / checkpoints.length * 100)
+        badge.textContent = percentage + '%'
+        badge.setAttribute('aria-label', percentage + '% complete')
+      }
     }
 
     try {
@@ -242,7 +373,6 @@ docker compose version</code></pre>
       })
     }
     showProgress()
-    document.querySelector('#print').addEventListener('click', () => window.print())
   </script>
 </body>
 </html>
